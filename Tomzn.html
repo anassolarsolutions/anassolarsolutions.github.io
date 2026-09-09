@@ -1,1 +1,1425 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All TOMZN Circuit Breakers | Anas S&E Solutions</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        :root {
+            --primary-blue: #0056b3;
+            --secondary-blue: #007bff;
+            --dark-blue: #003d82;
+
+            --accent-yellow: #ffc107;
+            --accent-orange: #ff8c00;
+
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #343a40;
+
+            --white: #ffffff;
+
+            --shadow: 0 4px 12px rgba(0,0,0,0.10);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1,h2,h3,h4,h5,h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .logo-text span {
+            color: var(--accent-yellow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+
+        /* ================= MAIN ================= */
+
+        .breakers {
+            background: var(--light-gray);
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h1 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .section-title h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-yellow);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .catalogue-tools {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 35px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 650px;
+            margin: 0 auto 20px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,86,179,0.08);
+        }
+
+        /* ================= FILTERS ================= */
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            border: 1px solid var(--primary-blue);
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 9px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* ================= RESULT COUNT ================= */
+
+        .result-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ================= PRODUCT GRID ================= */
+
+        .breaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .breaker-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .breaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .breaker-img {
+            height: 220px;
+            background: #f1f3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .breaker-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 12px;
+            transition: var(--transition);
+        }
+
+        .breaker-card:hover .breaker-img img {
+            transform: scale(1.05);
+        }
+
+        .breaker-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            align-self: flex-start;
+            background: #eaf2ff;
+            color: var(--primary-blue);
+            padding: 4px 9px;
+            border-radius: 3px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .breaker-info h3 {
+            font-size: 1.05rem;
+            line-height: 1.45;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .breaker-info p {
+            font-size: 0.84rem;
+            color: #666;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .quote-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 11px 15px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .quote-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .quote-btn i {
+            margin-right: 6px;
+        }
+
+        /* ================= NO RESULTS ================= */
+
+        .no-results {
+            display: none;
+            text-align: center;
+            background: var(--white);
+            padding: 50px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .no-results h3 {
+            margin-bottom: 8px;
+        }
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-btn {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .back-btn a {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--accent-yellow);
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-btn a:hover {
+            background: var(--accent-orange);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--dark-gray);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .jdr-glow {
+            color: #ff4444;
+            text-shadow:
+                0 0 10px #ff0000,
+                0 0 20px #ff0000,
+                0 0 30px #ff0000;
+
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow:
+                    0 0 10px #ff0000,
+                    0 0 20px #ff0000,
+                    0 0 30px #ff0000;
+            }
+
+            to {
+                text-shadow:
+                    0 0 15px #ff0000,
+                    0 0 25px #ff0000,
+                    0 0 35px #ff0000;
+            }
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition);
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .section-title h1 {
+                font-size: 2rem;
+            }
+
+            .breaker-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .result-info {
+                flex-direction: column;
+                gap: 5px;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .breakers {
+                padding-top: 100px;
+            }
+
+            .section-title h1 {
+                font-size: 1.75rem;
+            }
+
+            .breaker-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breaker-img {
+                height: 230px;
+            }
+
+            .filters {
+                justify-content: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="container header-container">
+
+        <a href="index.html" class="logo-text">
+            Anas <span>S&E</span>
+        </a>
+
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav>
+            <ul>
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="index.html#services">Services</a>
+                </li>
+
+                <li>
+                    <a href="index.html#inverters">Inverters</a>
+                </li>
+
+                <li>
+                    <a href="index.html#faq">FAQ</a>
+                </li>
+
+                <li>
+                    <a href="index.html#contact">Contact</a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= BREAKERS ================= -->
+
+<section class="breakers">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h1>All TOMZN Circuit Breakers</h1>
+
+            <p>
+                Premium TOMZN AC, DC, PV, MCB and MCCB circuit protection solutions
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH + FILTER -->
+
+        <div class="catalogue-tools">
+
+            <div class="search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search TOMZN breakers..."
+                >
+
+            </div>
+
+
+            <div class="filters">
+
+                <button class="filter-btn active" data-filter="all">
+                    All
+                </button>
+
+                <button class="filter-btn" data-filter="ac">
+                    AC MCB
+                </button>
+
+                <button class="filter-btn" data-filter="dc">
+                    DC MCB
+                </button>
+
+                <button class="filter-btn" data-filter="pv">
+                    PV / Solar
+                </button>
+
+                <button class="filter-btn" data-filter="mccb">
+                    MCCB
+                </button>
+
+                <button class="filter-btn" data-filter="smart">
+                    Smart Breaker
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-info">
+
+            <span id="resultCount">
+                Showing products
+            </span>
+
+            <span>
+                TOMZN Circuit Breaker Collection
+            </span>
+
+        </div>
+
+
+        <!-- PRODUCT GRID -->
+
+        <div class="breaker-grid" id="breakerGrid">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div class="breaker-card"
+                 data-category="ac"
+                 data-name="2P 40A 400V AC MCB C Type">
+
+                <div class="breaker-img">
+
+                    <img
+                        src="https://ae01.alicdn.com/kf/S91a49dec9719427690aa6f7eb8bb9d05B.jpg"
+                        alt="TOMZN 2P 40A AC MCB"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN AC MCB
+                    </span>
+
+                    <h3>
+                        2P 40A 400V AC MCB – C Type
+                    </h3>
+
+                    <p>
+                        TOMZN TOB1-63H series AC circuit breaker for
+                        overload and short-circuit protection.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%202P%2040A%20400V%20AC%20MCB%20C%20Type.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+
+            <div class="breaker-card"
+                 data-category="dc pv"
+                 data-name="2P 80A 100A 125A DC MCB 600V PV">
+
+                <div class="breaker-img">
+
+                    <img
+                        src="https://ae01.alicdn.com/kf/Hef6b1b439f1840e9a2d04b964a5239a38.jpg"
+                        alt="TOMZN DC MCB 600V"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN DC / PV
+                    </span>
+
+                    <h3>
+                        2P 80A / 100A / 125A DC MCB 600V
+                    </h3>
+
+                    <p>
+                        DC miniature circuit breaker designed for
+                        DC distribution and photovoltaic systems.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%20DC%20MCB%20600V.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+
+            <div class="breaker-card"
+                 data-category="dc pv"
+                 data-name="2P DC 1000V Solar MCB">
+
+                <div class="breaker-img">
+
+                    <img
+                        src="https://ae01.alicdn.com/kf/S00e30557606441ff942e56c3433347a1o.jpg"
+                        alt="TOMZN 1000V DC Solar MCB"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN PV MCB
+                    </span>
+
+                    <h3>
+                        2P DC 1000V Solar MCB
+                    </h3>
+
+                    <p>
+                        Available from 3A to 63A for photovoltaic
+                        and DC solar applications.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%202P%20DC%201000V%20Solar%20MCB.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 4 -->
+
+            <div class="breaker-card"
+                 data-category="mccb dc pv"
+                 data-name="TOMZN TOM7Z DC MCCB 1500V">
+
+                <div class="breaker-img">
+
+                    <img
+                        src="https://ae01.alicdn.com/kf/S64f3f08b76304c6f9a30a6bd54826fb3r.jpg_640x640q90.jpg"
+                        alt="TOMZN TOM7Z DC MCCB 1500V"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN DC MCCB
+                    </span>
+
+                    <h3>
+                        TOM7Z DC MCCB 1500V
+                    </h3>
+
+                    <p>
+                        High-current DC molded case circuit breaker
+                        for solar PV, wind and DC power systems.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%20TOM7Z%20DC%20MCCB%201500V.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 5 -->
+
+            <div class="breaker-card"
+                 data-category="ac"
+                 data-name="2P 50A 400V AC MCB C Type">
+
+                <div class="breaker-img">
+
+                    <div style="
+                        width:100%;
+                        height:100%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        color:#999;
+                        font-size:3rem;
+                    ">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN AC MCB
+                    </span>
+
+                    <h3>
+                        2P 50A 400V AC MCB – C Type
+                    </h3>
+
+                    <p>
+                        AC miniature circuit breaker designed for
+                        overload and short-circuit protection.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%202P%2050A%20400V%20AC%20MCB.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 6 -->
+
+            <div class="breaker-card"
+                 data-category="ac"
+                 data-name="2P 63A 400V AC MCB C Type">
+
+                <div class="breaker-img">
+
+                    <div style="
+                        width:100%;
+                        height:100%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        color:#999;
+                        font-size:3rem;
+                    ">
+                        <i class="fas fa-plug"></i>
+                    </div>
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN AC MCB
+                    </span>
+
+                    <h3>
+                        2P 63A 400V AC MCB – C Type
+                    </h3>
+
+                    <p>
+                        TOMZN AC safety breaker for electrical
+                        distribution and protection applications.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%202P%2063A%20400V%20AC%20MCB.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 7 -->
+
+            <div class="breaker-card"
+                 data-category="smart"
+                 data-name="TOMZN MCB238 WiFi Smart Circuit Breaker">
+
+                <div class="breaker-img">
+
+                    <div style="
+                        width:100%;
+                        height:100%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        color:#999;
+                        font-size:3rem;
+                    ">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN SMART
+                    </span>
+
+                    <h3>
+                        MCB238 WiFi Smart Circuit Breaker
+                    </h3>
+
+                    <p>
+                        DIN-rail WiFi smart circuit breaker with
+                        remote control through smart-home platforms.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%20MCB238%20WiFi%20Smart%20Circuit%20Breaker.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 8 -->
+
+            <div class="breaker-card"
+                 data-category="dc pv"
+                 data-name="2P DC 600V MCB PV C Curve">
+
+                <div class="breaker-img">
+
+                    <div style="
+                        width:100%;
+                        height:100%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        color:#999;
+                        font-size:3rem;
+                    ">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+
+                </div>
+
+                <div class="breaker-info">
+
+                    <span class="brand-badge">
+                        TOMZN PV MCB
+                    </span>
+
+                    <h3>
+                        2P DC 600V MCB – C Curve
+                    </h3>
+
+                    <p>
+                        DC circuit breaker designed for photovoltaic
+                        systems and direct-current applications.
+                    </p>
+
+                    <a
+                        class="quote-btn"
+                        target="_blank"
+                        href="https://wa.me/923481830504?text=Hi!%20I'm%20interested%20in%20TOMZN%202P%20DC%20600V%20MCB%20C%20Curve.%20Please%20provide%20details%20and%20pricing."
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- NO RESULTS -->
+
+        <div class="no-results" id="noResults">
+
+            <i class="fas fa-search"></i>
+
+            <h3>
+                No breakers found
+            </h3>
+
+            <p>
+                Try another product name, rating or category.
+            </p>
+
+        </div>
+
+
+        <div class="back-btn">
+
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-container">
+
+            <div class="footer-col">
+
+                <h3>
+                    Anas S&E Solutions
+                </h3>
+
+                <p>
+                    Your trusted partner for premium solar and
+                    electrical solutions across Pakistan.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="https://facebook.com/anassolarsolutions"
+                       target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://x.com/anassolarsolutions"
+                       target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a href="https://instagram.com/anassolarsolutions"
+                       target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="https://linkedin.com/company/anassolarsolutions"
+                       target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html#services">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html#inverters">
+                            Inverters
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="tomzn-breakers.html">
+                            TOMZN Breakers
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html#faq">
+                            FAQ
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html#contact">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>
+                    Contact Info
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        0348-1830504
+                    </li>
+
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        info@anassolarsolutions.com
+                    </li>
+
+                    <li>
+                        <i class="fab fa-whatsapp"></i>
+                        +92 348 1830504
+                    </li>
+
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        Mandi Bahauddin, Punjab
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            <p>
+                &copy; 2023 Anas S&E Solutions.
+                All Rights Reserved.
+                |
+                Design & Development by
+                <span class="jdr-glow">
+                    JDR-Production
+                </span>
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /* Mobile Menu */
+
+    document
+        .querySelector('.mobile-menu-btn')
+        .addEventListener('click', function () {
+
+            document
+                .querySelector('nav ul')
+                .classList
+                .toggle('active');
+
+        });
+
+
+    /* Close Mobile Menu */
+
+    document
+        .querySelectorAll('nav ul li a')
+        .forEach(function(link) {
+
+            link.addEventListener('click', function() {
+
+                document
+                    .querySelector('nav ul')
+                    .classList
+                    .remove('active');
+
+            });
+
+        });
+
+
+    /* Product Filtering */
+
+    const filterButtons =
+        document.querySelectorAll('.filter-btn');
+
+    const cards =
+        document.querySelectorAll('.breaker-card');
+
+    const searchInput =
+        document.getElementById('searchInput');
+
+    const resultCount =
+        document.getElementById('resultCount');
+
+    const noResults =
+        document.getElementById('noResults');
+
+
+    let currentFilter = 'all';
+
+
+    function filterProducts() {
+
+        const search =
+            searchInput.value.toLowerCase().trim();
+
+        let visible = 0;
+
+
+        cards.forEach(function(card) {
+
+            const categories =
+                card.dataset.category
+                    .toLowerCase();
+
+            const name =
+                card.dataset.name
+                    .toLowerCase();
+
+
+            const categoryMatch =
+                currentFilter === 'all' ||
+                categories.includes(currentFilter);
+
+
+            const searchMatch =
+                search === '' ||
+                name.includes(search);
+
+
+            if (categoryMatch && searchMatch) {
+
+                card.style.display = 'flex';
+
+                visible++;
+
+            } else {
+
+                card.style.display = 'none';
+
+            }
+
+        });
+
+
+        resultCount.innerHTML =
+            `Showing <strong>${visible}</strong> breaker${visible !== 1 ? 's' : ''}`;
+
+
+        if (visible === 0) {
+
+            noResults.style.display = 'block';
+
+        } else {
+
+            noResults.style.display = 'none';
+
+        }
+
+    }
+
+
+    /* Filter Buttons */
+
+    filterButtons.forEach(function(button) {
+
+        button.addEventListener('click', function() {
+
+            filterButtons.forEach(function(btn) {
+
+                btn.classList.remove('active');
+
+            });
+
+            this.classList.add('active');
+
+            currentFilter =
+                this.dataset.filter;
+
+            filterProducts();
+
+        });
+
+    });
+
+
+    /* Search */
+
+    searchInput.addEventListener(
+        'input',
+        filterProducts
+    );
+
+
+    /* Header Shadow */
+
+    window.addEventListener('scroll', function() {
+
+        const header =
+            document.querySelector('header');
+
+        if (window.scrollY > 100) {
+
+            header.style.boxShadow =
+                '0 4px 12px rgba(0,0,0,0.1)';
+
+        } else {
+
+            header.style.boxShadow =
+                'none';
+
+        }
+
+    });
+
+
+    /* Initial Count */
+
+    filterProducts();
+
+</script>
+
+</body>
+</html>
